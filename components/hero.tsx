@@ -47,7 +47,8 @@ export default function Hero({
 
 				{/*BOTTOM IMAGE*/}
 				<div
-					className="absolute bottom-20 w-screen z-1 overflow-visible">
+					id="bottom-image"
+					className="absolute -bottom-5 w-screen overflow-visible">
 					<Image
 						src={city}
 						alt="city"
@@ -55,6 +56,7 @@ export default function Hero({
 							scale: 1.7,
 							width: "100vw",
 							maxWidth: "none",
+							transformOrigin: "bottom center",
 						}}
 					/>
 				</div>
