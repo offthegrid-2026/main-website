@@ -1,7 +1,7 @@
 "use client";
 import Lenis from "lenis";
 import { useEffect, useRef } from "react";
-import { useScroll } from "framer-motion";
+import { useMotionValue, useScroll } from "framer-motion";
 import {
 	Event,
 	Footer,
@@ -16,6 +16,8 @@ import {
 export default function App() {
 	const container = useRef<HTMLDivElement | null>(null);
 	const container1 = useRef<HTMLDivElement | null>(null);
+	const spaMode = true;
+	const frozenScrollYProgress = useMotionValue(0);
 	useEffect(() => {
 		const lenis = new Lenis();
 		function raf(time: number) {
@@ -25,10 +27,14 @@ export default function App() {
 
 		requestAnimationFrame(raf);
 	}, []);
+
+
 	const { scrollYProgress } = useScroll({
 		target: container,
 		offset: ["start start", "end end"],
 	});
+
+
 	const { scrollYProgress: scrollYProgress1 } = useScroll({
 		target: container1,
 		offset: ["start start", "end end"],
@@ -37,9 +43,9 @@ export default function App() {
 		<>
 			<div
 				ref={container}
-				className="relative">
-				<Hero scrollYProgress={scrollYProgress} />
-				<Event scrollYProgress={scrollYProgress} />
+				className={spaMode ? "relative h-screen" : "relative min-h-[200vh]"}>
+				<Hero scrollYProgress={spaMode ? frozenScrollYProgress : scrollYProgress} />
+				{/*<Event scrollYProgress={scrollYProgress} />*/}
 			</div>
 			{/*<WhoWeAre />*/}
 			{/*<div*/}
