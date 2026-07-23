@@ -32,6 +32,7 @@ export default function Hero({
 							scale: 1.7,
 							width: "100vw",
 							maxWidth: "none",
+							transformOrigin: "bottom center",
 						}}
 					/>
 				</div>
