@@ -24,7 +24,7 @@ export default function Hero({
 
 				<div
 					id="bottom-image"
-					className="absolute bottom-20 w-screen overflow-visible">
+					className="absolute -bottom-5 w-screen overflow-visible">
 					<Image
 						src={city}
 						alt="city"
