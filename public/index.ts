@@ -24,3 +24,4 @@ export { default as party3 } from "./party3.png";
 export { default as arrowUp } from "./arrowUp.svg";
 export { default as flowCurveTextWhite } from "./flowCurveTextWhite.svg";
 export { default as city } from "./city.svg";
+export { default as pattern } from "./bg-pattern.svg";
