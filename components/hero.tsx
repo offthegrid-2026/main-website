@@ -36,11 +36,11 @@ export default function Hero({
 				{/*</div>*/}
 
 				{/*MAIN*/}
-				<div>
+				<div className="main-hero py-50">
 
-					{/*<h1 className="text-[40px] font-helveticaNeue leading-tight text-white uppercase">*/}
-					{/*	HELLO*/}
-					{/*</h1>*/}
+					<h1 className="text-[40px] leading-tight text-white uppercase">
+						HELLO
+					</h1>
 
 				</div>
 
@@ -63,15 +63,15 @@ export default function Hero({
 
 
 				{/*BG*/}
-				<div className="absolute z-0">
+				<div className="absolute -bottom-400 z-0">
 					<Image
 						src={pattern}
 						alt="bg"
 						style={{
-							scale: 1.7,
+							scale: 1.2,
 							width: "100vw",
 							maxWidth: "none",
-							opacity: 0.1,
+							opacity: 0.03,
 						}}
 					/>
 				</div>

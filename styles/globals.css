@@ -1,23 +1,18 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-heroColor: #150c1c;
-  --color-greenColor: #b3eb16;
-  --color-eventBgColor: #1c1c1c;
+    --color-heroColor: #150c1c;
+    --color-greenColor: #b3eb16;
+    --color-eventBgColor: #1c1c1c;
 
-  --font-helveticaNeue: Helvetica Neue, sans-serif;
-  --font-bodoniseventytwo: bodoniseventytwo, sans-serif;
-  --font-humaneMedium: humaneMedium, sans-serif;
+    --font-helveticaNeue: "helveticaNeue", sans-serif;
+    --font-bodoniseventytwo: "bodoniseventytwo", sans-serif;
+    --font-humaneMedium: "humaneMedium", sans-serif;
+
+    --font-poppins: var(--font-poppins);
+    --font-tektur: var(--font-tektur);
 }
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
@@ -29,8 +24,8 @@
 }
 
 body {
-	overflow-x: hidden;
-	background-color: #4001f5;
+    overflow-x: hidden;
+    background-color: #4001f5;
 }
 
 body::-webkit-scrollbar {
@@ -51,3 +46,4 @@ body::-webkit-scrollbar {
 	src: url("../fonts/63bf3e1c32ea7bb19e1bdfad_Humane-Medium.otf");
 	font-family: "humaneMedium";
 }
+
