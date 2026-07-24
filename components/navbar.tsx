@@ -38,12 +38,22 @@ export default function Navbar() {
 
 
 			</div>
-			<div className="self-start mt-9">
-				<Menu />
-			</div>
+			{/*<div className="self-start mt-9">*/}
+			{/*	<Menu />*/}
+			{/*</div>*/}
 			<div className="flex items-center gap-2 self-start">
-				<Button title="Become A Speaker" />
-				<Button title="Get Pass" />
+				<Button
+					title="BECOME A SPEAKER"
+					textColor="#150c1c"
+					fromColor="#ff3f9c"
+					toColor="#ff005d"
+				/>
+				<Button
+					title="REGISTER YOUR SEAT"
+					textColor="#b3eb16"
+					fromColor="#2c00ff"
+					toColor="#7b00ff"
+				/>
 			</div>
 		</div>
 	);

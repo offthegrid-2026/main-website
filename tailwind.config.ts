@@ -12,6 +12,7 @@ export default {
         helveticaNeue: ["Helvetica Neue", "sans-serif"],
         bodoniseventytwo: ["bodoniseventytwo", "sans-serif"],
         humaneMedium: ["humaneMedium", "sans-serif"],
+        tektur: ["Tektur", "sans-serif"],
       },
     },
   },
