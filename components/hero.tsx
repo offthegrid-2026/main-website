@@ -38,9 +38,9 @@ export default function Hero({
 				{/*MAIN*/}
 				<div className="main-hero py-50">
 
-					<h1 className="text-[40px] leading-tight text-white uppercase">
-						HELLO
-					</h1>
+					{/*<h1 className="text-[40px] leading-tight text-white uppercase">*/}
+					{/*	HELLO*/}
+					{/*</h1>*/}
 
 				</div>
 
