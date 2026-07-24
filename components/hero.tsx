@@ -2,6 +2,7 @@
 import { motion, MotionValue, useTransform } from "framer-motion";
 import {bees, city, pattern} from "@/public";
 import Image from "next/image";
+import HeroText from "@/components/herotext";
 import Link from "next/link";
 
 export default function Hero({
@@ -17,31 +18,22 @@ export default function Hero({
 			className="flex flex-col w-full h-screen bg-heroColor sticky top-0 left-0 overflow-hidden"
 		>
 
-			<div className="hero-sec flex flex-col gap-0 items-center w-full h-full relative p-10">
-
-				{/*PART OF*/}
-				{/*<div className="bengal absolute left-8 top-42">*/}
-				{/*	<p*/}
-				{/*		className="text-sm uppercase text-white font-medium tracking-tight leading-tight font-helveticaNeue">*/}
-				{/*		PART OF THE*/}
-				{/*	</p>*/}
-				{/*	<Link href="/">*/}
-				{/*		<Image*/}
-				{/*			src={bees}*/}
-				{/*			alt="logo"*/}
-				{/*			width={180}*/}
-				{/*			height={180}*/}
-				{/*		/>*/}
-				{/*	</Link>*/}
-				{/*</div>*/}
+			<div className="hero-sec flex flex-col w-full h-full relative p-10">
 
 				{/*MAIN*/}
-				<div className="main-hero py-50">
-
-					{/*<h1 className="text-[40px] leading-tight text-white uppercase">*/}
-					{/*	HELLO*/}
-					{/*</h1>*/}
-
+				<div
+					className="hero-text mt-20
+					flex flex-col items-center
+					z-20"
+				>
+					<div className="scale-80 lg:scale-90">
+						<HeroText />
+					</div>
+					<div>
+						<h1 className="text-5xl text-white bottom-200">
+							COMING SOON
+						</h1>
+					</div>
 				</div>
 
 
@@ -51,7 +43,8 @@ export default function Hero({
 					className="absolute w-screen overflow-visible
 					lg:-bottom-5 lg:scale-100
 					md:bottom-8 md:scale-110
-					bottom-30 scale-165"
+					bottom-30 scale-165
+					z-10"
 				>
 					<Image
 						src={city}

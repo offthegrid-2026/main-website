@@ -57,7 +57,7 @@ export default function Navbar() {
 			<div className="hidden md:flex flex-col lg:flex-row items-center gap-2 lg:self-start ">
 				<Button
 					title="BECOME A SPEAKER"
-					textColor="#150c1c"
+					textColor="#ffffff"
 					fromColor="#ff3f9c"
 					toColor="#ff005d"
 				/>
