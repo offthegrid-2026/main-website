@@ -25,7 +25,9 @@ export default function Button({
 				items-center justify-center
 				overflow-hidden
 				px-4 py-2
-				font-tektur font-medium text-lg uppercase tracking-tight
+				font-tektur font-medium lg:text-lg md:text-sm text-xs
+				md:w-50 lg:w-max
+				uppercase tracking-tight
 				transition-all duration-300
 				hover:scale-[1.01]
 				active:scale-95

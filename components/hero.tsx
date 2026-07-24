@@ -48,7 +48,11 @@ export default function Hero({
 				{/*BOTTOM IMAGE*/}
 				<div
 					id="bottom-image"
-					className="absolute -bottom-5 w-screen overflow-visible">
+					className="absolute w-screen overflow-visible
+					lg:-bottom-5 lg:scale-100
+					md:bottom-8 md:scale-110
+					bottom-30 scale-165"
+				>
 					<Image
 						src={city}
 						alt="city"
@@ -63,7 +67,12 @@ export default function Hero({
 
 
 				{/*BG*/}
-				<div className="absolute -bottom-400 z-0">
+				<div
+					className="absolute z-0
+					lg:-bottom-400 lg:scale-100
+					md:-bottom-140 md:scale-150
+					-bottom-40 scale-200"
+				>
 					<Image
 						src={pattern}
 						alt="bg"
