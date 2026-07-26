@@ -1,8 +1,9 @@
 
-import { motion, MotionValue, useTransform } from "framer-motion";
-import {bees, city, pattern} from "@/public";
-import Image from "next/image";
 import HeroText from "@/components/herotext";
+import ShinyText from "@/components/shinytext";
+import { bees, city, pattern } from "@/public";
+import { motion, MotionValue, useTransform } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Hero({
@@ -29,11 +30,30 @@ export default function Hero({
 					<div className="scale-80 lg:scale-90">
 						<HeroText />
 					</div>
-					<div>
-						<h1 className="text-5xl text-white bottom-200">
-							COMING SOON
-						</h1>
-					</div>
+					{/* fades in once the hero artwork has finished settling */}
+					<motion.div className="-mt-20"
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 1.4, duration: 0.9, ease: "easeOut" }}
+					>
+						{/* ShinyText fills glyphs with a background-clip gradient, which only
+                            covers the element box - leading/padding keep descenders inside it */}
+						<ShinyText
+							className="font-bodoniseventytwo uppercase tracking-[0.04em]
+                            text-[72px] md:text-[96px] lg:text-[70px]
+                            leading-[1.2] pb-[0.12em]"
+							text="Coming Soon..."
+							speed={2}
+							delay={0}
+							color="#b5b5b5"
+							shineColor="#ffffff"
+							spread={120}
+							direction="left"
+							yoyo={false}
+							pauseOnHover={false}
+							disabled={false}
+						/>
+					</motion.div>
 				</div>
 
 

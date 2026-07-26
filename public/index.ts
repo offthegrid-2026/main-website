@@ -33,3 +33,4 @@ export { default as heroelement4 } from "./hero-text/future-grad.svg";
 export { default as heroelement5 } from "./hero-text/orange.svg";
 export { default as heroelement6 } from "./hero-text/pink.svg";
 export { default as heroelement7 } from "./hero-text/purple.svg";
+export { default as heroelement8 } from "./hero-text/of.svg";
