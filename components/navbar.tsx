@@ -1,8 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { logo } from "@/public";
 import { bees } from "@/public";
-import { Button, Menu } from "@/components";
+import { AnimatedLogo, Button, Menu } from "@/components";
 
 export default function Navbar() {
 	return (
@@ -22,13 +21,7 @@ export default function Navbar() {
 				<div className="flex gap-[calc(40*var(--u))]">
 					<div>
 						<Link href="/">
-							<Image
-								src={logo}
-								alt="logo"
-								width={180}
-								height={180}
-								className="block w-[calc(180*var(--u))] h-auto"
-							/>
+							<AnimatedLogo className="w-[calc(180*var(--u))]" />
 						</Link>
 					</div>
 

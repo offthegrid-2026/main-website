@@ -1,4 +1,6 @@
 export { default as logo } from "./logo.svg";
+// same artwork with the eye's iris removed, so it can be overlaid and animated
+export { default as logoStatic } from "./logo-static.svg";
 export { default as bees } from "./bees.svg";
 export { default as menuDrop } from "./menuDrop.svg";
 export { default as discord } from "./discord.svg";
