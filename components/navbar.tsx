@@ -7,7 +7,7 @@ export default function Navbar() {
 	return (
 		<div
 			className="fixed top-0 left-0 w-full
-			flex flex-col md:flex-row gap-[calc(8*var(--u))] md:gap-0
+			flex flex-col md:flex-row gap-[calc(48*var(--u))] md:gap-0
 			justify-between items-center
 			py-[calc(32*var(--u))] px-[calc(32*var(--u))]
 			z-50"

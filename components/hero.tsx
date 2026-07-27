@@ -22,13 +22,15 @@ export default function Hero({
 			<div className="hero-sec flex flex-col w-full h-full relative p-[calc(40*var(--u))]">
 
 				{/*MAIN*/}
-				{/* below md the block grows to fill the section and centres itself; from
-				    md up it reverts to the top-anchored layout the desktop sizes assume */}
+				{/* The block grows to fill the section and centres itself, which keeps it
+				    clear of the navbar. Only from 1261px up - where the artwork has
+				    finally narrowed enough to sit inside the logos - does it revert to
+				    the top-anchored layout the desktop sizes are tuned against. */}
 				<div
 					className="hero-text
 					flex flex-1 flex-col items-center justify-center
-					mt-0 md:mt-[calc(80*var(--u))]
-					md:flex-none md:justify-start
+					mt-0 min-[1261px]:mt-[calc(80*var(--u))]
+					min-[1261px]:flex-none min-[1261px]:justify-start
 					z-20"
 				>
 					{/* relative/top shifts the artwork visually but leaves its layout box
