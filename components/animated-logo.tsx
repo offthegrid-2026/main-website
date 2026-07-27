@@ -2,7 +2,7 @@
 
 import { animate, motion, useMotionValue, type AnimationPlaybackControls } from "framer-motion";
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { logoStatic } from "@/public";
 
 /*
@@ -35,11 +35,19 @@ const GLIDE = 0.8;
 // seconds the eye rests before each glide, rolled fresh every time
 const DWELL_MIN = 1;
 const DWELL_MAX = 5;
+// while hovered the roll is skipped and every rest is this long
+const HOVER_DWELL = 0.5;
 
-const nextDwell = () => (DWELL_MIN + Math.random() * (DWELL_MAX - DWELL_MIN)) * 1000;
+const nextDwell = (hovered: boolean) =>
+    (hovered ? HOVER_DWELL : DWELL_MIN + Math.random() * (DWELL_MAX - DWELL_MIN)) * 1000;
 
 export default function AnimatedLogo({ className = "" }: { className?: string }) {
     const x = useMotionValue(LOOK_LEFT);
+    // a ref, not state: the loop below must read the live value without the
+    // effect re-running and restarting the animation on every hover
+    const hovered = useRef(false);
+    // lets pointerenter cut a rest short instead of waiting out a 5s roll
+    const wake = useRef<(() => void) | null>(null);
 
     // Driven imperatively rather than by a repeating keyframe: a keyframe cycle
     // bakes its timing into `times` and replays it identically, so the dwell
@@ -51,7 +59,13 @@ export default function AnimatedLogo({ className = "" }: { className?: string })
 
         const rest = () =>
             new Promise<void>((resolve) => {
-                timer = setTimeout(resolve, nextDwell());
+                const done = () => {
+                    clearTimeout(timer);
+                    wake.current = null;
+                    resolve();
+                };
+                timer = setTimeout(done, nextDwell(hovered.current));
+                wake.current = done;
             });
 
         void (async () => {
@@ -69,12 +83,23 @@ export default function AnimatedLogo({ className = "" }: { className?: string })
         return () => {
             cancelled = true;
             clearTimeout(timer);
+            wake.current = null;
             glide?.stop();
         };
     }, [x]);
 
     return (
-        <span className={`relative block ${className}`}>
+        <span
+            className={`relative block ${className}`}
+            onPointerEnter={() => {
+                hovered.current = true;
+                // shorten a rest already in progress so hover reacts immediately
+                wake.current?.();
+            }}
+            onPointerLeave={() => {
+                hovered.current = false;
+            }}
+        >
             <Image
                 src={logoStatic}
                 alt="Off The Grid"

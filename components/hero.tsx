@@ -27,7 +27,9 @@ export default function Hero({
 					flex flex-col items-center
 					z-20"
 				>
-					<div className="scale-80 lg:scale-90">
+					{/* relative/top shifts the artwork visually but leaves its layout box
+					    in place, so the heading below does not follow it up */}
+					<div className="relative top-[calc(-40*var(--u))] scale-80 lg:scale-90">
 						<HeroText />
 					</div>
 					{/* fades in once the hero artwork has finished settling */}
