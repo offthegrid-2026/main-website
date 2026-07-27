@@ -41,14 +41,14 @@ export default function Hero({
 						{/* ShinyText fills glyphs with a background-clip gradient, which only
                             covers the element box - leading/padding keep descenders inside it */}
 						<ShinyText
-							className="font-bodoniseventytwo uppercase tracking-[0.04em]
+							className="font-laCo uppercase tracking-[0.04em]
                             text-[calc(72*var(--u))] md:text-[calc(96*var(--u))] lg:text-[calc(70*var(--u))]
                             leading-[1.2] pb-[0.12em]"
-							text="Coming Soon..."
+							text="Coming Soon"
 							speed={2}
 							delay={0}
-							color="#b5b5b5"
-							shineColor="#ffffff"
+							color="#00a143"
+							shineColor="#00ff40"
 							spread={120}
 							direction="left"
 							yoyo={false}

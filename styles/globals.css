@@ -8,6 +8,7 @@
     --font-helveticaNeue: "helveticaNeue", sans-serif;
     --font-bodoniseventytwo: "bodoniseventytwo", sans-serif;
     --font-humaneMedium: "humaneMedium", sans-serif;
+    --font-laCo: "laCo", sans-serif;
 
     --font-poppins: var(--font-poppins);
     --font-tektur: var(--font-tektur);
@@ -61,5 +62,11 @@ body::-webkit-scrollbar {
 @font-face {
 	src: url("../fonts/63bf3e1c32ea7bb19e1bdfad_Humane-Medium.otf");
 	font-family: "humaneMedium";
+}
+
+@font-face {
+	src: url("../fonts/Lá Cờ 1.0 Demo.ttf") format("truetype");
+	font-family: "laCo";
+	font-display: swap;
 }
 
