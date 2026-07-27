@@ -24,10 +24,11 @@ export default function Button({
 				group relative inline-flex
 				items-center justify-center
 				overflow-hidden
-				px-[calc(16*var(--u))] py-[calc(8*var(--u))]
+				px-[calc(24*var(--u))] py-[calc(14*var(--u))]
+				lg:px-[calc(16*var(--u))] lg:py-[calc(8*var(--u))]
 				font-tektur font-medium
-				text-[max(11px,calc(18*var(--u)))]
-				md:w-[calc(200*var(--u))] lg:w-max
+				text-[max(14px,calc(24*var(--u)))] lg:text-[max(11px,calc(18*var(--u)))]
+				lg:w-max
 				uppercase tracking-tight
 				transition-all duration-300
 				hover:scale-[1.01]
