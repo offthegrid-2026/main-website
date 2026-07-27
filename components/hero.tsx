@@ -22,9 +22,15 @@ export default function Hero({
 			<div className="hero-sec flex flex-col w-full h-full relative p-[calc(40*var(--u))]">
 
 				{/*MAIN*/}
+				{/* The block grows to fill the section and centres itself, which keeps it
+				    clear of the navbar. Only from 1261px up - where the artwork has
+				    finally narrowed enough to sit inside the logos - does it revert to
+				    the top-anchored layout the desktop sizes are tuned against. */}
 				<div
-					className="hero-text mt-[calc(80*var(--u))]
-					flex flex-col items-center
+					className="hero-text
+					flex flex-1 flex-col items-center justify-center
+					mt-0 min-[1261px]:mt-[calc(80*var(--u))]
+					min-[1261px]:flex-none min-[1261px]:justify-start
 					z-20"
 				>
 					{/* relative/top shifts the artwork visually but leaves its layout box
@@ -41,7 +47,7 @@ export default function Hero({
 						{/* ShinyText fills glyphs with a background-clip gradient, which only
                             covers the element box - leading/padding keep descenders inside it */}
 						<ShinyText
-							className="font-laCo uppercase tracking-[0.04em]
+							className="font-laCo uppercase tracking-[0.04em] text-center
                             text-[calc(72*var(--u))] md:text-[calc(96*var(--u))] lg:text-[calc(70*var(--u))]
                             leading-[1.2] pb-[0.12em]"
 							text="Coming Soon"

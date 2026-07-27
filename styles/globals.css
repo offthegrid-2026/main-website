@@ -23,11 +23,13 @@
  * heading all scale by the same factor instead of holding a pixel size and
  * crowding each other on a smaller display. A 1536x864 laptop lands at 0.8.
  *
- * Floored at 0.45 so phones do not end up with 14px logos, and capped at 1 so the
- * design does not inflate past its reference size on very large monitors.
+ * Capped at 1 so the design does not inflate past its reference size on large
+ * monitors, and floored at 0.7 because a phone is ~0.2 of the reference width -
+ * scaling that far down leaves the small type at 5-6px. Anything that would still
+ * be too small at the floor carries its own px minimum via max().
  */
 :root {
-    --u: clamp(0.45px, min(100vw / 1920, 100vh / 900), 1px);
+    --u: clamp(0.7px, min(100vw / 1920, 100vh / 900), 1px);
 }
 
 @layer base {
