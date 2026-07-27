@@ -1,4 +1,6 @@
 export { default as logo } from "./logo.svg";
+// same artwork with the eye's iris removed, so it can be overlaid and animated
+export { default as logoStatic } from "./logo-static.svg";
 export { default as bees } from "./bees.svg";
 export { default as menuDrop } from "./menuDrop.svg";
 export { default as discord } from "./discord.svg";
@@ -25,3 +27,12 @@ export { default as arrowUp } from "./arrowUp.svg";
 export { default as flowCurveTextWhite } from "./flowCurveTextWhite.svg";
 export { default as city } from "./city.svg";
 export { default as pattern } from "./bg-pattern.svg";
+export { default as herotext } from "./herotext.svg";
+export { default as heroelement1 } from "./hero-text/bengal-grad.svg";
+export { default as heroelement2 } from "./hero-text/blob.svg";
+export { default as heroelement3 } from "./hero-text/design-grad.svg";
+export { default as heroelement4 } from "./hero-text/future-grad.svg";
+export { default as heroelement5 } from "./hero-text/orange.svg";
+export { default as heroelement6 } from "./hero-text/pink.svg";
+export { default as heroelement7 } from "./hero-text/purple.svg";
+export { default as heroelement8 } from "./hero-text/of.svg";

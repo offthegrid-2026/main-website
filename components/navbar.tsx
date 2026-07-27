@@ -1,48 +1,44 @@
 import Link from "next/link";
 import Image from "next/image";
-import { logo } from "@/public";
 import { bees } from "@/public";
-import { Button, Menu } from "@/components";
+import { AnimatedLogo, Button, Menu } from "@/components";
 
 export default function Navbar() {
 	return (
 		<div
 			className="fixed top-0 left-0 w-full
-			flex flex-col md:flex-row gap-2 md:gap-0
+			flex flex-col md:flex-row gap-[calc(8*var(--u))] md:gap-0
 			justify-between items-center
-			py-8 px-8
+			py-[calc(32*var(--u))] px-[calc(32*var(--u))]
 			z-50"
 		>
 
 			{/*LOGO*/}
-			<div className="flex gap-2 self-start">
+			<div className="flex gap-[calc(8*var(--u))] self-start">
 
-				<div
-					className="flex gap-10
-					lg:scale-100 md:scale-90 scale-80"
-				>
+				{/* --u replaces the old breakpoint scale steps, so this shrinks
+				    continuously with the viewport rather than jumping at md/lg */}
+				<div className="flex gap-[calc(40*var(--u))]">
 					<div>
-						<Image
-							src={logo}
-							alt="logo"
-							width={180}
-							height={180}
-						/>
+						<Link href="/">
+							<AnimatedLogo className="w-[calc(180*var(--u))]" />
+						</Link>
 					</div>
 
 					<div>
 						<p
-							className="text-sm uppercase text-white tracking-tight leading-tight">
+							className="text-[calc(14*var(--u))] uppercase text-white tracking-tight leading-tight ">
 							PART OF THE
 						</p>
-						<Link href="/">
-							<Image
-								src={bees}
-								alt="logo"
-								width={180}
-								height={180}
-							/>
-						</Link>
+						{/* bees.svg is 739x308 - forcing it into a square box letterboxed it
+						    and the leftover space read as a gap under "PART OF THE" */}
+						<Image
+							src={bees}
+							alt="logo"
+							width={739}
+							height={308}
+							className="block w-[calc(180*var(--u))] h-auto"
+						/>
 					</div>
 				</div>
 
@@ -54,10 +50,10 @@ export default function Navbar() {
 			{/*</div>*/}
 
 
-			<div className="hidden md:flex flex-col lg:flex-row items-center gap-2 lg:self-start ">
+			<div className="hidden md:flex flex-col lg:flex-row items-center gap-[calc(8*var(--u))] lg:self-start ">
 				<Button
 					title="BECOME A SPEAKER"
-					textColor="#150c1c"
+					textColor="#ffffff"
 					fromColor="#ff3f9c"
 					toColor="#ff005d"
 				/>

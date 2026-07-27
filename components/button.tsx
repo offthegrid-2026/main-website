@@ -24,9 +24,10 @@ export default function Button({
 				group relative inline-flex
 				items-center justify-center
 				overflow-hidden
-				px-4 py-2
-				font-tektur font-medium lg:text-lg md:text-sm text-xs
-				md:w-50 lg:w-max
+				px-[calc(16*var(--u))] py-[calc(8*var(--u))]
+				font-tektur font-medium
+				text-[calc(12*var(--u))] md:text-[calc(14*var(--u))] lg:text-[calc(18*var(--u))]
+				md:w-[calc(200*var(--u))] lg:w-max
 				uppercase tracking-tight
 				transition-all duration-300
 				hover:scale-[1.01]

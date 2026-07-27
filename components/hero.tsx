@@ -1,6 +1,8 @@
 
+import HeroText from "@/components/herotext";
+import ShinyText from "@/components/shinytext";
+import { bees, city, pattern } from "@/public";
 import { motion, MotionValue, useTransform } from "framer-motion";
-import {bees, city, pattern} from "@/public";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,31 +19,43 @@ export default function Hero({
 			className="flex flex-col w-full h-screen bg-heroColor sticky top-0 left-0 overflow-hidden"
 		>
 
-			<div className="hero-sec flex flex-col gap-0 items-center w-full h-full relative p-10">
-
-				{/*PART OF*/}
-				{/*<div className="bengal absolute left-8 top-42">*/}
-				{/*	<p*/}
-				{/*		className="text-sm uppercase text-white font-medium tracking-tight leading-tight font-helveticaNeue">*/}
-				{/*		PART OF THE*/}
-				{/*	</p>*/}
-				{/*	<Link href="/">*/}
-				{/*		<Image*/}
-				{/*			src={bees}*/}
-				{/*			alt="logo"*/}
-				{/*			width={180}*/}
-				{/*			height={180}*/}
-				{/*		/>*/}
-				{/*	</Link>*/}
-				{/*</div>*/}
+			<div className="hero-sec flex flex-col w-full h-full relative p-[calc(40*var(--u))]">
 
 				{/*MAIN*/}
-				<div className="main-hero py-50">
-
-					{/*<h1 className="text-[40px] leading-tight text-white uppercase">*/}
-					{/*	HELLO*/}
-					{/*</h1>*/}
-
+				<div
+					className="hero-text mt-[calc(80*var(--u))]
+					flex flex-col items-center
+					z-20"
+				>
+					{/* relative/top shifts the artwork visually but leaves its layout box
+					    in place, so the heading below does not follow it up */}
+					<div className="relative top-[calc(-40*var(--u))] scale-80 lg:scale-90">
+						<HeroText />
+					</div>
+					{/* fades in once the hero artwork has finished settling */}
+					<motion.div className="mt-[calc(-80*var(--u))]"
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 1.4, duration: 0.9, ease: "easeOut" }}
+					>
+						{/* ShinyText fills glyphs with a background-clip gradient, which only
+                            covers the element box - leading/padding keep descenders inside it */}
+						<ShinyText
+							className="font-laCo uppercase tracking-[0.04em]
+                            text-[calc(72*var(--u))] md:text-[calc(96*var(--u))] lg:text-[calc(70*var(--u))]
+                            leading-[1.2] pb-[0.12em]"
+							text="Coming Soon"
+							speed={2}
+							delay={0}
+							color="#00a143"
+							shineColor="#00ff40"
+							spread={120}
+							direction="left"
+							yoyo={false}
+							pauseOnHover={false}
+							disabled={false}
+						/>
+					</motion.div>
 				</div>
 
 
@@ -51,7 +65,8 @@ export default function Hero({
 					className="absolute w-screen overflow-visible
 					lg:-bottom-5 lg:scale-100
 					md:bottom-8 md:scale-110
-					bottom-30 scale-165"
+					bottom-30 scale-165
+					z-10"
 				>
 					<Image
 						src={city}
