@@ -53,14 +53,14 @@ export default function Hero({
                             --u alone lets the heading stop shrinking while the artwork carries
                             on - and eventually overtake it. */}
 						<ShinyText
-							className="font-laCo uppercase tracking-[0.04em] text-center
+							className="font-laCo uppercase tracking-[0.04em] text-center -mt-10
                             text-[min(calc(70*var(--u)),calc(7vw_-_5.6*var(--u)))]
                             leading-[1.2] pb-[0.12em]"
 							text="Coming Soon"
 							speed={2}
 							delay={0}
-							color="#00a143"
-							shineColor="#00ff40"
+							color="#a39d9d"
+							shineColor="#ffffff"
 							spread={120}
 							direction="left"
 							yoyo={false}
