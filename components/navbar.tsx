@@ -14,7 +14,10 @@ export default function Navbar() {
 		>
 
 			{/*LOGO*/}
-			<div className="flex gap-[calc(8*var(--u))] self-start">
+			{/* self-* is the cross axis: on the mobile flex-col navbar that is
+			    horizontal, so self-center puts the logo above the buttons; from md
+			    up the bar is a row again and self-start means top-aligned */}
+			<div className="flex gap-[calc(8*var(--u))] self-center md:self-start">
 
 				{/* --u replaces the old breakpoint scale steps, so this shrinks
 				    continuously with the viewport rather than jumping at md/lg */}
@@ -27,7 +30,7 @@ export default function Navbar() {
 
 					<div>
 						<p
-							className="text-[calc(14*var(--u))] uppercase text-white tracking-tight leading-tight ">
+							className="text-[max(10px,calc(14*var(--u)))] uppercase text-white tracking-tight leading-tight ">
 							PART OF THE
 						</p>
 						{/* bees.svg is 739x308 - forcing it into a square box letterboxed it
@@ -50,7 +53,7 @@ export default function Navbar() {
 			{/*</div>*/}
 
 
-			<div className="hidden md:flex flex-col lg:flex-row items-center gap-[calc(8*var(--u))] lg:self-start ">
+			<div className="flex flex-row md:flex-col lg:flex-row items-center gap-[calc(8*var(--u))] lg:self-start ">
 				<Button
 					title="BECOME A SPEAKER"
 					textColor="#ffffff"
