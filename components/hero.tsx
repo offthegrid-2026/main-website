@@ -39,16 +39,22 @@ export default function Hero({
 						<HeroText />
 					</div>
 					{/* fades in once the hero artwork has finished settling */}
-					<motion.div className="mt-[calc(-80*var(--u))]"
+					<motion.div className="mt-[calc(-25*var(--u))]"
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 1.4, duration: 0.9, ease: "easeOut" }}
 					>
 						{/* ShinyText fills glyphs with a background-clip gradient, which only
-                            covers the element box - leading/padding keep descenders inside it */}
+                            covers the element box - leading/padding keep descenders inside it.
+
+                            The size is 7% of the artwork's own width expression rather than a
+                            multiple of --u: the artwork is capped by the viewport once that is
+                            the tighter term, and --u floors out below ~1344px, so keying off
+                            --u alone lets the heading stop shrinking while the artwork carries
+                            on - and eventually overtake it. */}
 						<ShinyText
 							className="font-laCo uppercase tracking-[0.04em] text-center
-                            text-[calc(72*var(--u))] md:text-[calc(96*var(--u))] lg:text-[calc(70*var(--u))]
+                            text-[min(calc(70*var(--u)),calc(7vw_-_5.6*var(--u)))]
                             leading-[1.2] pb-[0.12em]"
 							text="Coming Soon"
 							speed={2}

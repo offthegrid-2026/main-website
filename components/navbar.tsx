@@ -7,7 +7,7 @@ export default function Navbar() {
 	return (
 		<div
 			className="fixed top-0 left-0 w-full
-			flex flex-col md:flex-row gap-[calc(48*var(--u))] md:gap-0
+			flex flex-col md:flex-row gap-[calc(80*var(--u))] md:gap-0
 			justify-between items-center
 			py-[calc(32*var(--u))] px-[calc(32*var(--u))]
 			z-50"
@@ -53,7 +53,10 @@ export default function Navbar() {
 			{/*</div>*/}
 
 
-			<div className="flex flex-row md:flex-col lg:flex-row items-center gap-[calc(8*var(--u))] lg:self-start ">
+			{/* stretch on the stacked column sizes both buttons to the widest one; from
+			    lg the row is back to natural widths and stretch would only equalise
+			    heights, which they already share */}
+			<div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-[calc(24*var(--u))] lg:gap-[calc(8*var(--u))] lg:self-start ">
 				<Button
 					title="BECOME A SPEAKER"
 					textColor="#ffffff"
