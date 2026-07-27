@@ -128,12 +128,16 @@ function HeroLayer({ layer, boosted }: { layer: Layer; boosted: boolean }) {
 export default function HeroText() {
     const [hovered, setHovered] = useState(false);
 
-    // Keep the width explicit. Every layer is absolutely positioned, so this box
-    // has no in-flow content of its own - a percentage or min() width would leave
-    // its shrink-to-fit parent nothing to size against and collapse the artwork.
+    // 1000 * --u keeps the artwork at its original size on the reference viewport
+    // and shrinks it in step with everything else. The second term is the width
+    // left over inside hero-sec's padding, so narrow screens cannot overflow.
+    // Both terms are viewport-derived on purpose: every layer here is absolutely
+    // positioned, so a percentage width would leave this box's shrink-to-fit
+    // parent nothing to measure and the artwork would collapse to zero.
     return (
         <div
-            className="relative w-[1000px] max-w-full aspect-[1000/378]"
+            className="relative aspect-[1000/378] max-w-full
+            w-[min(calc(1000*var(--u)),calc(100vw_-_80*var(--u)))]"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >

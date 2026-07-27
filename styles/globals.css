@@ -13,6 +13,22 @@
     --font-tektur: var(--font-tektur);
 }
 
+/*
+ * Fluid sizing unit for the above-the-fold screen (navbar + hero).
+ *
+ * Equals exactly 1px at the 1920x900 reference the layout was tuned against, and
+ * shrinks in step with whichever viewport dimension is tighter. Every fixed size
+ * up there is written as `calc(N * var(--u))`, so the logos, buttons, artwork and
+ * heading all scale by the same factor instead of holding a pixel size and
+ * crowding each other on a smaller display. A 1536x864 laptop lands at 0.8.
+ *
+ * Floored at 0.45 so phones do not end up with 14px logos, and capped at 1 so the
+ * design does not inflate past its reference size on very large monitors.
+ */
+:root {
+    --u: clamp(0.45px, min(100vw / 1920, 100vh / 900), 1px);
+}
+
 @layer base {
   *,
   ::after,

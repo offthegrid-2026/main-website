@@ -19,11 +19,11 @@ export default function Hero({
 			className="flex flex-col w-full h-screen bg-heroColor sticky top-0 left-0 overflow-hidden"
 		>
 
-			<div className="hero-sec flex flex-col w-full h-full relative p-10">
+			<div className="hero-sec flex flex-col w-full h-full relative p-[calc(40*var(--u))]">
 
 				{/*MAIN*/}
 				<div
-					className="hero-text mt-20
+					className="hero-text mt-[calc(80*var(--u))]
 					flex flex-col items-center
 					z-20"
 				>
@@ -31,7 +31,7 @@ export default function Hero({
 						<HeroText />
 					</div>
 					{/* fades in once the hero artwork has finished settling */}
-					<motion.div className="-mt-20"
+					<motion.div className="mt-[calc(-80*var(--u))]"
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 1.4, duration: 0.9, ease: "easeOut" }}
@@ -40,7 +40,7 @@ export default function Hero({
                             covers the element box - leading/padding keep descenders inside it */}
 						<ShinyText
 							className="font-bodoniseventytwo uppercase tracking-[0.04em]
-                            text-[72px] md:text-[96px] lg:text-[70px]
+                            text-[calc(72*var(--u))] md:text-[calc(96*var(--u))] lg:text-[calc(70*var(--u))]
                             leading-[1.2] pb-[0.12em]"
 							text="Coming Soon..."
 							speed={2}
