@@ -1,4 +1,5 @@
 
+import CtaButtons from "@/components/cta-buttons";
 import HeroText from "@/components/herotext";
 import ShinyText from "@/components/shinytext";
 import { bees, city, pattern } from "@/public";
@@ -22,14 +23,27 @@ export default function Hero({
 			<div className="hero-sec flex flex-col w-full h-full relative p-[calc(40*var(--u))]">
 
 				{/*MAIN*/}
-				{/* The block grows to fill the section and centres itself, which keeps it
-				    clear of the navbar. Only from 1261px up - where the artwork has
-				    finally narrowed enough to sit inside the logos - does it revert to
-				    the top-anchored layout the desktop sizes are tuned against. */}
+				{/* From md to 1260px the block grows to fill the section and centres
+				    itself, which keeps it clear of the navbar. Only from 1261px up -
+				    where the artwork has finally narrowed enough to sit inside the
+				    logos - does it revert to the top-anchored layout the desktop sizes
+				    are tuned against.
+
+				    Below md the buttons are no longer in the navbar, so that bar is just
+				    the logo row (~185*--u tall) and the artwork moves up into the space
+				    they left. Centring cannot do that once the buttons join this stack -
+				    the group just grows downward and re-centres - so this anchors to the
+				    top instead and clears the shortened navbar by hand. */}
+				{/* The mobile rules are max-md, not md overrides, on purpose: Tailwind
+				    emits arbitrary min-[...] variants ahead of the named breakpoints, so
+				    a md: utility outranks min-[1261px] at equal specificity no matter
+				    which pixel value is larger. max-md cannot match above 768px at all,
+				    which leaves every rule from md up byte-identical to before. */}
 				<div
 					className="hero-text
 					flex flex-1 flex-col items-center justify-center
-					mt-0 min-[1261px]:mt-[calc(80*var(--u))]
+					max-md:justify-start
+					mt-0 max-md:mt-[calc(215*var(--u))] min-[1261px]:mt-[calc(80*var(--u))]
 					min-[1261px]:flex-none min-[1261px]:justify-start
 					z-20"
 				>
@@ -68,6 +82,18 @@ export default function Hero({
 							disabled={false}
 						/>
 					</motion.div>
+
+					{/* Phone/tablet home for the navbar's two CTAs. Column on the narrowest
+					    screens because the two labels side by side do not fit a 375px
+					    viewport; from sm they sit in a row again. Inside hero-text so they
+					    keep its z-20 and stay above the city artwork, which would otherwise
+					    swallow the clicks. */}
+					<CtaButtons
+						className="flex md:hidden
+						flex-col sm:flex-row items-stretch sm:items-center justify-center
+						gap-[calc(24*var(--u))]
+						mt-[calc(60*var(--u))]"
+					/>
 				</div>
 
 

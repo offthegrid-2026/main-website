@@ -11,8 +11,12 @@ const poppins = Poppins({
 	display: "swap",
 });
 
+// Tektur is variable on two axes: wght 400-900 and wdth 75-100. next/font only
+// ships the width axis if it is asked for by name, and without it font-stretch
+// on the buttons would have no axis to move and silently do nothing.
 const tektur = Tektur({
 	subsets: ["latin"],
+	axes: ["wdth"],
 	variable: "--font-tektur",
 	display: "swap",
 });
