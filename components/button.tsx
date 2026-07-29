@@ -18,6 +18,9 @@ export default function Button({
 								   className = "",
 							   }: ButtonProps) {
 	return (
+		// font-stretch-semi-condensed is wdth 87.5, halfway into Tektur's 75-100
+		// range - narrow enough to tighten the two long labels without the letters
+		// reading as compressed.
 		<button
 			onClick={onClick}
 			className={`
@@ -26,7 +29,7 @@ export default function Button({
 				overflow-hidden
 				px-[calc(24*var(--u))] py-[calc(14*var(--u))]
 				lg:px-[calc(16*var(--u))] lg:py-[calc(8*var(--u))]
-				font-tektur font-medium
+				font-tektur font-bold font-stretch-100%
 				text-[max(14px,calc(24*var(--u)))] lg:text-[max(11px,calc(18*var(--u)))]
 				lg:w-max
 				uppercase tracking-tight

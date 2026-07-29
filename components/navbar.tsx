@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { bees } from "@/public";
-import { AnimatedLogo, Button, Menu } from "@/components";
+import { AnimatedLogo, CtaButtons, Menu } from "@/components";
 
 export default function Navbar() {
 	return (
@@ -53,23 +53,12 @@ export default function Navbar() {
 			{/*</div>*/}
 
 
-			{/* stretch on the stacked column sizes both buttons to the widest one; from
-			    lg the row is back to natural widths and stretch would only equalise
-			    heights, which they already share */}
-			<div className="flex flex-col lg:flex-row items-stretch lg:items-center gap-[calc(24*var(--u))] lg:gap-[calc(8*var(--u))] lg:self-start ">
-				<Button
-					title="BECOME A SPEAKER"
-					textColor="#ffffff"
-					fromColor="#ff3f9c"
-					toColor="#ff005d"
-				/>
-				<Button
-					title="REGISTER YOUR SEAT"
-					textColor="#b3eb16"
-					fromColor="#2c00ff"
-					toColor="#7b00ff"
-				/>
-			</div>
+			{/* Below md these move into the hero, under "COMING SOON" - the copy there
+			    is the one that renders, so this is hidden outright rather than
+			    restyled. stretch on the stacked md column sizes both buttons to the
+			    widest one; from lg the row is back to natural widths and stretch
+			    would only equalise heights, which they already share */}
+			<CtaButtons className="max-md:hidden flex flex-col lg:flex-row items-stretch lg:items-center gap-[calc(24*var(--u))] lg:gap-[calc(8*var(--u))] lg:self-start " />
 		</div>
 	);
 }
