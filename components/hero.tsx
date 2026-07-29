@@ -98,22 +98,41 @@ export default function Hero({
 
 
 				{/*BOTTOM IMAGE*/}
+				{/* city.svg is 823x782 but the skyline is only the rect at y 8..122 -
+				    the bottom ~15% - and the rest is empty sky the light beams sweep
+				    through. So the artwork is always rendered several viewport-widths
+				    wide and mostly clipped, and the only part that reads is that band,
+				    whose height works out to 13.85% of whatever width the image gets.
+
+				    It used to be sized by 100vw alone and scaled twice: scale-165 on
+				    this div (default centre origin) on top of scale 1.7 on the image
+				    (bottom-centre origin). Those two disagree about the origin, so the
+				    div's growth pushed its bottom edge down by (1.65-1)/2 of a height
+				    that itself tracks 100vw - about 237px at 767px wide, against only
+				    120px of bottom-30 to hold it up. That is what cut the skyline's
+				    base off as the viewport approached md, and why a 375px phone (where
+				    the same sum comes to 116px vs 120px) escaped it.
+
+				    Now: one element, one size, no transform. max() makes it behave like
+				    object-fit: cover - 170vw reproduces the old desktop size exactly and
+				    still wins on any viewport wider than 1.265:1, while 215vh takes over
+				    on tall ones and holds the band at ~30% of the screen instead of
+				    letting it collapse to 18% on a phone. The two agree at the 1920x900
+				    reference, so there is no seam where control passes between them. */}
 				<div
 					id="bottom-image"
-					className="absolute w-screen overflow-visible
-					lg:-bottom-5 lg:scale-100
-					md:bottom-8 md:scale-110
-					bottom-30 scale-165
-					z-10"
+					className="absolute -bottom-5 w-screen overflow-visible z-10"
 				>
 					<Image
 						src={city}
 						alt="city"
 						style={{
-							scale: 1.7,
-							width: "100vw",
+							width: "max(170vw, 215vh)",
 							maxWidth: "none",
-							transformOrigin: "bottom center",
+							// centres the overflowing image on the div's centre, which is
+							// where the old scale(1.7) about bottom-centre also left it
+							marginLeft: "50%",
+							transform: "translateX(-50%)",
 						}}
 					/>
 				</div>
