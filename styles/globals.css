@@ -32,6 +32,104 @@
     --u: clamp(0.7px, min(100vw / 1920, 100vh / 900), 1px);
 }
 
+/*
+ * Perspective floor grid behind the hero, replacing public/bg-pattern.svg.
+ *
+ * The SVG was a 610x947 raster-sized drawing of exactly this: horizontals in a
+ * geometric progression (45.8, 41.3, 37.5, 34.2 ... ratio ~0.91) converging on a
+ * vanishing point at its top edge. Because it was a fixed-aspect image sized off
+ * 100vw and then pushed around with big negative `bottom` offsets, which slice of
+ * it landed on screen depended on the viewport, and around the md breakpoint the
+ * slice fell outside the hero entirely - hence "it vanishes". It also carried
+ * bezier segments mixed into the same path.
+ *
+ * This builds the same geometry from a real 3D plane instead, so the recession is
+ * computed by the renderer rather than baked into coordinates:
+ *
+ *   - every dimension is a percentage of the hero or a vh, so there is no aspect
+ *     ratio to fall out of step with the viewport and no breakpoints at all;
+ *   - the cell size is a percentage of the plane, so the grid holds the same
+ *     density on a phone as on a desktop rather than getting finer as the
+ *     viewport grows;
+ *   - the lines are gradient stops, so they are straight by construction and stay
+ *     hairline-crisp at any size.
+ *
+ * Every knob is a variable below. --grid-opacity is the one to reach for first.
+ */
+.hero-grid {
+	/* white on the near-black hero, so this is effectively the line brightness.
+	   0.03 was the old SVG's value and read as absent on a phone; past ~0.15 the
+	   grid stops being texture and starts competing with the artwork. */
+	--grid-opacity: 0.07;
+	/* smaller = the recession bites harder and lines pile up sooner */
+	--grid-depth: 60vh;
+	/* 90deg would lay the plane perfectly flat and collapse it to a line */
+	--grid-tilt: 74deg;
+	/* 0% puts the horizon on the hero's top edge, so the grid fills the whole
+	   background and converges off the top - the framing the SVG version had */
+	--grid-horizon: 0%;
+	/* The plane is far wider and taller than the hero so that after the tilt its
+	   own edges are still outside the frame and never read as a border.
+	   The height is not arbitrary: projecting a point L up the plane puts it at
+	   y = depth * (100 - L*cos(tilt)) / (depth + L*sin(tilt)) vh below the top of
+	   the hero, so the far edge only clears the top edge once L*cos(tilt) > 100,
+	   i.e. L > 100/cos(74deg) = 363%. At the 220% a first cut used, the far edge
+	   landed 8.7vh INSIDE the frame as a hard horizontal line. */
+	--grid-plane-w: 320%;
+	--grid-plane-h: 420%;
+	/* Percentages of the plane, so the column and row counts are fixed at every
+	   viewport. Split per axis because they are not interchangeable: -x is the
+	   gap between the converging vertical lines and is read straight off the
+	   plane's width, while -y is the gap between the rows and gets compressed by
+	   the perspective, so equal numbers do not give equal spacing on screen.
+	   At 320% plane width, -x of 3.5% puts a column every 11.2vw at the foot of
+	   the hero - about 9 across the frame. */
+	--grid-cell-x: 3.5%;
+	--grid-cell-y: 2%;
+	--grid-stroke: 1px;
+	/* how far down the plane the lines have fully faded in; without this the
+	   rows compress into a solid band as they approach the vanishing point */
+	--grid-fade: 55%;
+
+	position: absolute;
+	inset: 0;
+	overflow: hidden;
+	pointer-events: none;
+	opacity: var(--grid-opacity);
+	perspective: var(--grid-depth);
+	perspective-origin: 50% var(--grid-horizon);
+}
+
+.hero-grid::before {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: var(--grid-plane-w);
+	height: var(--grid-plane-h);
+	margin-left: calc(var(--grid-plane-w) / -2);
+	/* the bottom edge is the hinge, so it stays put at the foot of the hero and
+	   the plane lies away from the viewer above it */
+	transform: rotateX(var(--grid-tilt));
+	transform-origin: 50% 100%;
+	background-image:
+		/* draws the vertical lines - "to right" is the direction they are spaced
+		   along, not the direction they run */
+		repeating-linear-gradient(
+			to right,
+			#fff 0 var(--grid-stroke),
+			transparent var(--grid-stroke) var(--grid-cell-x)
+		),
+		/* and this one the horizontal rows */
+		repeating-linear-gradient(
+			to bottom,
+			#fff 0 var(--grid-stroke),
+			transparent var(--grid-stroke) var(--grid-cell-y)
+		);
+	-webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 var(--grid-fade));
+	mask-image: linear-gradient(to bottom, transparent 0%, #000 var(--grid-fade));
+}
+
 @layer base {
   *,
   ::after,

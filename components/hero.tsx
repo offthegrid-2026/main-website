@@ -2,7 +2,7 @@
 import CtaButtons from "@/components/cta-buttons";
 import HeroText from "@/components/herotext";
 import ShinyText from "@/components/shinytext";
-import { bees, city, pattern } from "@/public";
+import { bees, city } from "@/public";
 import { motion, MotionValue, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -139,23 +139,9 @@ export default function Hero({
 
 
 				{/*BG*/}
-				<div
-					className="absolute z-0
-					lg:-bottom-400 lg:scale-100
-					md:-bottom-140 md:scale-150
-					-bottom-40 scale-200"
-				>
-					<Image
-						src={pattern}
-						alt="bg"
-						style={{
-							scale: 1.2,
-							width: "100vw",
-							maxWidth: "none",
-							opacity: 0.03,
-						}}
-					/>
-				</div>
+				{/* purely decorative, and built entirely from .hero-grid in globals.css
+				    - see the comment there for the geometry and the tuning knobs */}
+				<div className="hero-grid z-0" aria-hidden="true" />
 
 
 			</div>
