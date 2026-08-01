@@ -92,18 +92,18 @@ export default function Hero({
                             here would be enough for the scanner to emit that dead rule, so
                             it is described rather than written.) */}
 						<ShinyText
-							className="font-laCo uppercase tracking-[0.04em] text-center -mt-10
+							className="font-gokschil uppercase tracking-[0.04em] text-center -mt-10
                             text-[length:var(--art-heading)]
                             leading-[1.2] pb-[0.12em]"
 							text="Coming Soon"
-							speed={2}
-							delay={0}
-							color="#a39d9d"
+							speed={3}
+							delay={1}
+							color="#c0bfbf"
 							shineColor="#ffffff"
 							spread={120}
 							direction="left"
 							yoyo={false}
-							pauseOnHover={false}
+							pauseOnHover={true}
 							disabled={false}
 						/>
 					</motion.div>
