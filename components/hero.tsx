@@ -92,18 +92,18 @@ export default function Hero({
                             here would be enough for the scanner to emit that dead rule, so
                             it is described rather than written.) */}
 						<ShinyText
-							className="font-laCo uppercase tracking-[0.04em] text-center -mt-10
+							className="font-gokschil uppercase tracking-[0.04em] text-center -mt-10
                             text-[length:var(--art-heading)]
                             leading-[1.2] pb-[0.12em]"
 							text="Coming Soon"
-							speed={2}
-							delay={0}
-							color="#a39d9d"
+							speed={3}
+							delay={1}
+							color="#c0bfbf"
 							shineColor="#ffffff"
 							spread={120}
 							direction="left"
 							yoyo={false}
-							pauseOnHover={false}
+							pauseOnHover={true}
 							disabled={false}
 						/>
 					</motion.div>
@@ -144,9 +144,18 @@ export default function Hero({
 				    on tall ones and holds the band at ~30% of the screen instead of
 				    letting it collapse to 18% on a phone. The two agree at the 1920x900
 				    reference, so there is no seam where control passes between them. */}
+				{/* left-0 is what makes the horizontal placement hold still. Without an
+				    inset this box falls back to its static position, which inside hero-sec
+				    is within that element's p-[40*--u] - so the artwork carried a 40*--u
+				    push to the right. --u is clamped between 0.7px and 1px, so that push
+				    is 40px on a desktop but 28px anywhere --u bottoms out, while the
+				    translate beside it is a percentage of an image width that scales with
+				    the viewport. One term fixed in px and one proportional cannot stay in
+				    step, and the artwork slid ~0.4% of its width - 6-7px - between a
+				    desktop and a phone. Pinning to 0 removes the fixed term outright. */}
 				<div
 					id="bottom-image"
-					className="absolute -bottom-5 w-screen overflow-visible z-10"
+					className="absolute -bottom-5 left-0 w-screen overflow-visible z-10"
 				>
 					<Image
 						src={city}
@@ -154,10 +163,16 @@ export default function Hero({
 						style={{
 							width: "max(170vw, 215vh)",
 							maxWidth: "none",
-							// centres the overflowing image on the div's centre, which is
-							// where the old scale(1.7) about bottom-centre also left it
+							// Sole control of the horizontal position, as a percentage of the
+							// image's own width - so it means the same thing at every size.
+							//
+							// -49.375% is the hand-tuned -50.6% with the container's old
+							// 40*--u push folded in: that push was 40/(1920*1.7) = 1.225% of
+							// the image width on any ordinary desktop, so the two forms render
+							// identically there. They stop agreeing on phones and tablets,
+							// which is the drift being corrected.
 							marginLeft: "50%",
-							transform: "translateX(-50%)",
+							transform: "translateX(-49.575%)",
 						}}
 					/>
 				</div>

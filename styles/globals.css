@@ -9,6 +9,7 @@
     --font-bodoniseventytwo: "bodoniseventytwo", sans-serif;
     --font-humaneMedium: "humaneMedium", sans-serif;
     --font-laCo: "laCo", sans-serif;
+    --font-gokschil: "gokschil", sans-serif;
 
     --font-poppins: var(--font-poppins);
     --font-tektur: var(--font-tektur);
@@ -237,6 +238,15 @@ body::-webkit-scrollbar {
 @font-face {
 	src: url("../fonts/Lá Cờ 1.0 Demo.ttf") format("truetype");
 	font-family: "laCo";
+	font-display: swap;
+}
+
+/* Gokschil.otf is OpenType with CFF outlines (an OTTO-tagged file), so the hint
+   is opentype rather than the truetype used above - the wrong hint makes some
+   browsers skip the source and fall through to the sans-serif fallback. */
+@font-face {
+	src: url("../fonts/Gokschil.otf") format("opentype");
+	font-family: "gokschil";
 	font-display: swap;
 }
 
