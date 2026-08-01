@@ -33,6 +33,60 @@
 }
 
 /*
+ * Hero artwork: two arrangements of the same eight pieces, swapped at the same
+ * 1261px line the hero block itself switches on (see components/hero.tsx).
+ *
+ * The canvas is a variable rather than a literal because the mobile file is not
+ * a rescale of the desktop one - it is 612x443 against 1000x378, a much squarer
+ * box - so the aspect ratio, the natural width and every layer's percentages all
+ * have to move together. Doing it in CSS keeps a single DOM with a single set of
+ * running animations, and avoids matchMedia in JS, which would render the
+ * desktop arrangement on the server and snap to mobile on hydration.
+ *
+ * The layer boxes are supplied per element as --l*-d / --l*-m custom properties
+ * by components/herotext.tsx.
+ */
+.hero-art {
+	--art-w: 1000;
+	--art-h: 378;
+	/* Multiplier on the natural size, kept separate from --art-w because that one
+	   also sets the aspect ratio - resizing the artwork by editing --art-w would
+	   stretch it instead. This is the knob to reach for if the mobile block wants
+	   to be bigger or smaller in the frame. */
+	--art-scale: 1;
+
+	position: relative;
+	max-width: 100%;
+	aspect-ratio: var(--art-w) / var(--art-h);
+	width: min(
+		calc(var(--art-w) * var(--art-scale) * var(--u)),
+		calc(100vw - 80 * var(--u))
+	);
+}
+
+.hero-art-layer {
+	position: absolute;
+	left: var(--lx-d);
+	top: var(--ly-d);
+	width: var(--lw-d);
+	height: var(--lh-d);
+}
+
+@media (max-width: 1260px) {
+	.hero-art {
+		--art-w: 612;
+		--art-h: 443;
+	}
+
+	.hero-art-layer {
+		left: var(--lx-m);
+		top: var(--ly-m);
+		width: var(--lw-m);
+		height: var(--lh-m);
+	}
+}
+
+/*
  * Flat grid behind the hero, replacing public/bg-pattern.svg.
  *
  * The SVG was a 610x947 fixed-aspect drawing sized off 100vw and then pushed
