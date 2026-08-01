@@ -33,6 +33,7 @@ export default function Button({
 				text-[max(14px,calc(24*var(--u)))] lg:text-[max(11px,calc(18*var(--u)))]
 				lg:w-max
 				uppercase tracking-tight
+				cursor-pointer
 				transition-all duration-300
 				hover:scale-[1.01]
 				active:scale-95
