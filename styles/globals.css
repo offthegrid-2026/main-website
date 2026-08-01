@@ -30,6 +30,27 @@
  */
 :root {
     --u: clamp(0.7px, min(100vw / 1920, 100vh / 900), 1px);
+
+	/*
+	 * Hero artwork sizing, on :root so the "COMING SOON" heading can key off the
+	 * same numbers instead of restating them.
+	 *
+	 * --art-size is the artwork's natural width before the viewport cap;
+	 * --art-px is what it actually renders at; --art-heading follows from that.
+	 * Only --art-size (and the canvas) is overridden per band - the other two are
+	 * declared once and pick up whichever --art-size won the cascade, because
+	 * custom property references resolve after the cascade has chosen a value.
+	 *
+	 * 7% of the artwork width is not a new number: the heading used to be written
+	 * min(70*--u, 7vw - 5.6*--u), which is exactly 7% of min(1000*--u, 100vw -
+	 * 80*--u). Stating it as a ratio makes it inherit responsiveness for free
+	 * rather than needing its own hand-derived expression per band.
+	 */
+	--art-w: 1000;
+	--art-h: 378;
+	--art-size: calc(1000 * var(--u));
+	--art-px: min(var(--art-size), calc(100vw - 80 * var(--u)));
+	--art-heading: calc(0.07 * var(--art-px));
 }
 
 /*
@@ -47,21 +68,10 @@
  * by components/herotext.tsx.
  */
 .hero-art {
-	--art-w: 1000;
-	--art-h: 378;
-	/* Multiplier on the natural size, kept separate from --art-w because that one
-	   also sets the aspect ratio - resizing the artwork by editing --art-w would
-	   stretch it instead. This is the knob to reach for if the mobile block wants
-	   to be bigger or smaller in the frame. */
-	--art-scale: 1;
-
 	position: relative;
 	max-width: 100%;
 	aspect-ratio: var(--art-w) / var(--art-h);
-	width: min(
-		calc(var(--art-w) * var(--art-scale) * var(--u)),
-		calc(100vw - 80 * var(--u))
-	);
+	width: var(--art-px);
 }
 
 .hero-art-layer {
@@ -72,10 +82,15 @@
 	height: var(--lh-d);
 }
 
-@media (max-width: 1260px) {
-	.hero-art {
+/* Phrased as the exact negation of min-width:1261px rather than max-width:1260px,
+   so it is the same boundary Tailwind's max-[1261px] compiles to and the two
+   cannot disagree - including at fractional viewport widths under zoom, where
+   1260 < w < 1261 would otherwise satisfy neither rule. */
+@media not all and (min-width: 1261px) {
+	:root {
 		--art-w: 612;
 		--art-h: 443;
+		--art-size: calc(612 * var(--u));
 	}
 
 	.hero-art-layer {
@@ -83,6 +98,32 @@
 		top: var(--ly-m);
 		width: var(--lw-m);
 		height: var(--lh-m);
+	}
+}
+
+/*
+ * Tablets, sized in viewport units rather than --u.
+ *
+ * --u is clamp(0.7px, ..., 1px) and 1920 * 0.7 = 1344, so on any viewport
+ * narrower than that it is pinned at exactly 0.7 and every --u-derived size stops
+ * responding. Across this whole band that left the artwork frozen at one width -
+ * the same 578px on a 768 tablet as on a 1260 window - and the heading frozen at
+ * 49px. No multiplier fixes that; it just picks a different constant.
+ *
+ * 90vw is the term that makes it grow with the window. 72vh is the guard: the
+ * mobile canvas is nearly square (612x443 against the desktop 1000x378), so width
+ * alone would make a short landscape window overflow vertically. Whichever is
+ * tighter wins, which is width on a portrait tablet and height on a landscape one.
+ *
+ * The heading gets a slightly fatter ratio than the 7% used elsewhere so it holds
+ * its weight against the enlarged artwork.
+ */
+@media (min-width: 768px) {
+	@media not all and (min-width: 1261px) {
+		:root {
+			--art-size: min(90vw, 72vh);
+			--art-heading: calc(0.085 * var(--art-px));
+		}
 	}
 }
 
