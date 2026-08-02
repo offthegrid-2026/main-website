@@ -4,6 +4,8 @@ import { useState } from "react";
 import Button from "./button";
 import ComingSoonModal from "./coming-soon-modal";
 
+const WAITLIST_FORM = "https://forms.gle/UFsAiVAwWLHd3sW98";
+
 /*
  * The same two calls-to-action appear in two places that cannot share a DOM
  * node: the fixed navbar from md up, and inside the hero below "COMING SOON"
@@ -15,10 +17,10 @@ import ComingSoonModal from "./coming-soon-modal";
  * direction, gap and visibility.
  */
 export default function CtaButtons({ className = "" }: { className?: string }) {
-	// Neither CTA has anywhere to go yet, so both raise the same notice. The state
-	// sits here rather than in a provider because only one copy of this component
-	// is ever interactive - the other is display:none for the current breakpoint,
-	// so its buttons cannot be reached and its modal cannot be opened.
+	// Only "BECOME A SPEAKER" still has nowhere to go; the waitlist now points at
+	// the form. The state sits here rather than in a provider because only one copy
+	// of this component is ever interactive - the other is display:none for the
+	// current breakpoint, so its button cannot be reached and its modal cannot open.
 	const [notice, setNotice] = useState(false);
 
 	return (
@@ -32,11 +34,11 @@ export default function CtaButtons({ className = "" }: { className?: string }) {
 					onClick={() => setNotice(true)}
 				/>
 				<Button
-					title="REGISTER YOUR SEAT"
+					title="JOIN THE WAITLIST"
 					textColor="#b3eb16"
 					fromColor="#2c00ff"
 					toColor="#7b00ff"
-					onClick={() => setNotice(true)}
+					href={WAITLIST_FORM}
 				/>
 			</div>
 
